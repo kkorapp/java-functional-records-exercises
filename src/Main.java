@@ -1,16 +1,23 @@
 public class Main {
     public static void main(String[] args) {
-        Order order = new Order("ORD-100", "Anna Kowalska");
 
-        order.addItem(new Order.OrderItem("Keyboard", 249.99, 1));
-        order.addItem(new Order.OrderItem("Mouse", 99.99, 2));
+        LibraryAccount account =
+                new LibraryAccount("John Smith", 3, 5);
 
-        OrderSummary summary = new OrderSummary(
-                order.getOrderNumber(),
-                order.getCustomerName(),
-                order.total()
+        LibraryAccount.FineCalculator calculator =
+                account.new FineCalculator();
+
+        double fine = calculator.calculate();
+
+        MessagePrinter printer =
+                message -> System.out.println("[LIBRARY] " + message);
+
+        printer.print(
+                "Reader: " +
+                        account.getReaderName() +
+                        ", fine: " +
+                        fine +
+                        " PLN"
         );
-
-        System.out.println(summary);
     }
 }
