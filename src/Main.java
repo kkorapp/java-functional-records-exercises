@@ -1,26 +1,16 @@
 public class Main {
     public static void main(String[] args) {
+        Order order = new Order("ORD-100", "Anna Kowalska");
 
-        ServiceOrder order = new ServiceOrder("Alpha Company", 10, 120.0);
+        order.addItem(new Order.OrderItem("Keyboard", 249.99, 1));
+        order.addItem(new Order.OrderItem("Mouse", 99.99, 2));
 
-        PriceCalculator calculator = new PriceCalculator();
+        OrderSummary summary = new OrderSummary(
+                order.getOrderNumber(),
+                order.getCustomerName(),
+                order.total()
+        );
 
-        PriceStrategy standard =
-                o -> o.hours() * o.hourRate();
-
-        PriceStrategy discount =
-                o -> o.hours() * o.hourRate() * 0.90;
-
-        PriceStrategy weekend =
-                o -> o.hours() * o.hourRate() * 1.25;
-
-        System.out.println("Standard: " +
-                calculator.calculate(order, standard));
-
-        System.out.println("Discount: " +
-                calculator.calculate(order, discount));
-
-        System.out.println("Weekend: " +
-                calculator.calculate(order, weekend));
+        System.out.println(summary);
     }
 }
